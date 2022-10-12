@@ -42,6 +42,9 @@ packages:
 #
 # extra-deps: []
 
+extra-deps:
+- ParserFunction-0.1.0@sha256:57d0ec5555b25bd7505204f00602bf26ba7eadcd744817b110cd78c48a7a2dc5,754
+
 # Override default flag values for local packages and extra-deps
 # flags: {}
 
