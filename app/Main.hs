@@ -1,3 +1,4 @@
+{-# LANGUAGE BangPatterns #-}
 module Main (main) where
 
 import           Lib.Show
@@ -13,7 +14,9 @@ main = do
   hFlush stdout
   f <- getLine
 
-  let function = unwrap (parse f)
+  let !function = case parse f of
+        (Right x) -> x
+        (Left x)  -> error (show x)
 
   putStrLn "Enter the initial value of x:"
   putStr "x0 = "
@@ -52,5 +55,4 @@ main = do
   putStrLn "Done."
 
   where
-    unwrap (Right x) = x
-    unwrap (Left x) = error (show x)
+
