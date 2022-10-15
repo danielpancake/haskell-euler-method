@@ -1,8 +1,8 @@
 module Lib.Show (eulerShow, showStep, showStepWithIndent, showEulerMarkdown) where
 
-import Data.List (intersperse)
-import Lib.Types
-import Numeric (showFFloat)
+import           Data.List (intersperse)
+import           Lib.Types
+import           Numeric   (showFFloat)
 
 eulerShow :: Maybe Int -> [EulerStep] -> String
 eulerShow precision = unlines . (firstRow :) . map (showStep precision)
@@ -24,5 +24,5 @@ showStepWithIndent indent precision step =
 showEulerMarkdown :: Maybe Int -> [EulerStep] -> String
 showEulerMarkdown precision = unlines . (\rows -> firstRow : "| --- |" : rows) . map printRow
   where
-    firstRow = "| x | y | f(x, y) | d = hf(x, y) |"
+    firstRow = "| x | approx. y | f(x,y) | d = h*f(x, y) |"
     printRow row = "| " ++ showStepWithIndent "|" precision row ++ " |"

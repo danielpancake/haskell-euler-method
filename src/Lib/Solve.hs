@@ -1,9 +1,9 @@
 module Lib.Solve (approximate, math2haskell, eulerMethod) where
 
-import qualified Data.Map as Map
-import Data.Maybe
-import Lib.Types
-import Text.Parsec.Expr.Math
+import qualified Data.Map              as Map
+import           Data.Maybe
+import           Lib.Types
+import           Text.Parsec.Expr.Math
 
 approximate :: EvalType -> Int -> EvalType
 approximate x n = fromIntegral (round (x * m) :: Int) / m
@@ -18,9 +18,9 @@ math2haskell expr x y = fromJust (evaluate vars (Just expr))
 eulerMethod :: EulerParams -> [EulerStep]
 eulerMethod params =
   let (a, b) = eulerLimits params
-   in if a >= b + eulerStep params
-        then []
-        else eulerMethod'
+    in if a >= b + eulerStep params
+      then []
+      else eulerMethod'
   where
     eulerMethod' =
       let (x, b) = eulerLimits params
@@ -29,7 +29,7 @@ eulerMethod params =
           val = eulerFunction params x y
           f = case eulerPrecision params of
             Just prec -> approximate val prec
-            Nothing -> val
+            Nothing   -> val
 
           h = eulerStep params
           d = h * f
